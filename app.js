@@ -1918,6 +1918,9 @@ function init() {
   updateSwatches();
   newDocument(800, 600, 'white');
   fitView();
+  // 视口就绪较慢的环境（iframe / Pages 首帧）下再自适应一次，避免初始缩放被钳到最小值
+  window.addEventListener('load', () => fitView());
+  requestAnimationFrame(() => requestAnimationFrame(fitView));
   setTool('brush');
   $('#status-tool').textContent = '工具: 画笔';
   $('#status-hint').textContent = TOOLS.brush.hint;
