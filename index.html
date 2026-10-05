@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MiniPS — 网页版图像编辑器</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="menubar">
+  <div id="logo">Mini<span>PS</span></div>
+  <nav id="menus"></nav>
+</header>
+
+<div id="optionsbar"></div>
+
+<div id="main">
+  <div id="toolbar"></div>
+
+  <div id="canvas-area">
+    <div id="stage" class="checker">
+      <canvas id="composite"></canvas>
+      <canvas id="overlay"></canvas>
+      <div id="text-editor" contenteditable="true" spellcheck="false" hidden></div>
+    </div>
+    <div id="drop-hint" hidden>松开鼠标，将图片导入为新图层</div>
+  </div>
+
+  <aside id="rightbar">
+    <section id="color-section">
+      <div class="panel-title">颜色</div>
+      <div id="swatches">
+        <div id="bg-swatch" class="swatch" title="背景色"><input type="color" id="bg-input" value="#ffffff"></div>
+        <div id="fg-swatch" class="swatch" title="前景色（点击修改）"><input type="color" id="fg-input" value="#000000"></div>
+        <div id="swatch-tools">
+          <button id="swap-colors" title="交换前景/背景色 (X)">⇄</button>
+          <button id="reset-colors" title="重置为黑/白 (D)">◐</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="layers-panel">
+      <div class="panel-title">图层</div>
+      <div id="layer-controls">
+        <select id="blend-select" title="混合模式"></select>
+        <div id="opacity-row">
+          <span>不透明度</span>
+          <input type="range" id="opacity-slider" min="0" max="100" value="100">
+          <span id="opacity-val">100%</span>
+        </div>
+      </div>
+      <div id="layer-list"></div>
+      <div id="layer-footer">
+        <button id="btn-add-layer" title="新建图层 (Ctrl+Shift+N)">＋</button>
+        <button id="btn-dup-layer" title="复制图层 (Ctrl+J)">⧉</button>
+        <button id="btn-merge-layer" title="向下合并 (Ctrl+E)">▼</button>
+        <button id="btn-del-layer" title="删除图层">🗑</button>
+      </div>
+    </section>
+  </aside>
+</div>
+
+<footer id="statusbar">
+  <span id="status-doc"></span>
+  <span id="status-pos"></span>
+  <span id="status-tool"></span>
+  <span id="status-hint"></span>
+  <span class="spacer"></span>
+  <span id="zoom-label">100%</span>
+  <button id="zoom-out" title="缩小 (Ctrl+-)">−</button>
+  <button id="zoom-in" title="放大 (Ctrl++)">＋</button>
+  <button id="zoom-fit" title="适应窗口 (Ctrl+0)">适应</button>
+  <button id="zoom-100" title="实际像素 (Ctrl+1)">100%</button>
+</footer>
+
+<input type="file" id="file-open" accept="image/*" hidden>
+<input type="file" id="file-import" accept="image/*" multiple hidden>
+<input type="file" id="file-project" accept=".psx,.json" hidden>
+<div id="modal-root"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
